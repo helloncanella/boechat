@@ -1,0 +1,6 @@
+ion-view(title="Podcasts" hide-back-button="true")
+	ion-content
+		.list
+			a.item(ng-repeat="item in podcasts" ng-href="#/podcasts/{{item.id}}") {{item.title}}
+			
+	

@@ -11,7 +11,7 @@ var $ = require('gulp-load-plugins')();
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  jade: ['components/**/*.jade']
+  jade: ['www/**/*.jade']
 };
 
 gulp.task('default', ['sass']);
@@ -22,7 +22,7 @@ gulp.task('jade', function(){
       .on('error', function(error){
         console.warn(error)
       })
-      .pipe(gulp.dest('components'))
+      .pipe(gulp.dest('www'))
 });
 
 gulp.task('sass', function(done) {

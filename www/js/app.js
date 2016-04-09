@@ -33,7 +33,6 @@ angular.module('starter', ['ionic'])
   // setup an abstract state for the tabs directive
     .state('days', {
     url: '/days',
-    abstract: true,
     templateUrl: 'components/days/days.html'
   })
 
@@ -68,7 +67,16 @@ angular.module('starter', ['ionic'])
       return json;
     }
   }).success(function(response){
-    $scope.podcasts = response.rss.channel.item;
+    var podcasts = response.rss.channel.item;
+
+    podcasts.forEach(function(item, index, array){
+      item.id=index;
+    });
+
+    $scope.podcasts = podcasts;
+
+    console.log($scope.podcasts);
+
   })
 
   ;
