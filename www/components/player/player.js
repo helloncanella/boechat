@@ -1,37 +1,22 @@
-angular.module('player',[])
-
-.controller('audioController', [ '$scope', function($scope){
-  $scope.audios = [];
-
-  $scope.stopOldAudios = function(){
-    $scope.audios.forEach(function(audio, index, array){
-      audio.pause();
-    })
-
-    $scope.audios = []
-  }
-
-}])
-	
-.directive('video', function(){  
-  return{
-    restrict:'E',
-    link: function(scope, element){
-      scope.audios.push(element[0]);
-    }
-  }
-})	
+angular.module('player',[])	
 
 .directive('player', function(){
 	return{
 		restrict:'E',
 		scope:{},
 		bindToController:{
-			src: '@' 
+			src: '@',
+			oldAudios: '=audios' 
 		},
 		controller: function(){
-			this.src = '';
 			this.state = false;
+			this.registerAudio = function(audio){
+				this.oldAudios.push(audio[0]);		
+			}
+		},
+		link: function(scope, element, attr, ctrl){
+			var audio = element.find('audio');
+			ctrl.registerAudio(audio);				
 		},
 		controllerAs: 'ctrl',
 		templateUrl: 'components/player/player.html'

@@ -2,15 +2,12 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
-var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
-var rename = require('gulp-rename');
 var sh = require('shelljs');
 
 var $ = require('gulp-load-plugins')();
 
 var paths = {
-  sass: ['./scss/**/*.scss'],
+  sass: ['./**/*.scss'],
   jade: ['www/**/*.jade']
 };
 
@@ -26,20 +23,22 @@ gulp.task('jade', function(){
 });
 
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
-    .pipe(sass())
-    .on('error', sass.logError)
+  gulp.src('./scss/bundle.scss')
+    .pipe($.sassGlob())
+    .pipe($.sass())
+    .on('error', $.sass.logError)
     .pipe(gulp.dest('./www/css/'))
-    .pipe(minifyCss({
+    .pipe($.minifyCss({
       keepSpecialComments: 0
     }))
-    .pipe(rename({ extname: '.min.css' }))
+    .pipe($.rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['jade', 'sass'], function() {
   gulp.watch(paths.jade, ['jade']);
+  gulp.watch(paths.sass, ['sass']);
 });
 
 gulp.task('install', ['git-check'], function() {

@@ -1,0 +1,4 @@
+@import './scss/ionic.app.scss';
+
+//Always you use as reference the files declared in gulp.src
+@import '../www/components/**/*.scss';

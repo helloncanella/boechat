@@ -123,7 +123,19 @@ angular.module('starter', ['ionic','ngCordova','player'])
 })
 
 
+.controller('audioController', [ '$scope', function($scope){
+  $scope.audios = [];
 
+  $scope.stopOldAudios = function(){
+
+    $scope.audios.forEach(function(audio, index, array){
+      audio.pause();
+    })
+
+    $scope.audios = []
+  }
+
+}])
 
 
 
