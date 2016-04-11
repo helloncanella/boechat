@@ -1,4 +1,4 @@
 ion-view(title="Podcasts" hide-back-button="true")
 	ion-content
 		.list
-			a.item(on-touch="stopOldAudios()" ng-repeat="item in podcasts" ng-href="#/podcasts/listen/{{item.id}}") {{item.title}}
+			a.item(ng-repeat="item in podcasts" ng-href="#/podcasts/listen/{{item.id}}") {{item.title}}

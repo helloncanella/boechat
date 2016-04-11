@@ -26,7 +26,15 @@ angular.module('player',['ionic'])
 
 			this.count = 0;
 
+			this.rangeValue = 0;
+
 			this.paused = false;
+
+			this.stopOldAudios = function(){
+				this.oldAudios.forEach(function(audio){
+					audio.pause();
+				})
+			}
 
 			this.loading = {
 				show:function(){
@@ -66,6 +74,8 @@ angular.module('player',['ionic'])
 				
 		link: function(scope, element, attr, ctrl){
 
+			ctrl.stopOldAudios();
+
 			ctrl.loading.show();
 
 			var audio = element.find('audio');
@@ -95,8 +105,8 @@ angular.module('player',['ionic'])
 		link: function(scope, audio, attr, playerCtrl){
 			var duration;
 
-			audio.on('canplay', function(){
-				duration = audio[0].duration;
+			audio.on('durationchange', function(e){
+				duration = e.target.duration;
 
 				playerCtrl.duration = formatTime(duration);
 				

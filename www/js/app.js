@@ -55,7 +55,9 @@ angular.module('starter', ['ionic','ngCordova','player'])
     controller: [ '$http', '$scope', 'xmlToJson', function($http, $scope, xmlToJson){
 
       //Proxying in order to bypass CORS - impossible to use JSONp when the response is xml
-      var url = 'http://proxy-helloncanella.c9users.io/';
+      var url = 'https://hellon-proxy.herokuapp.com/';
+
+      $scope.podcasts = [];
 
       $http({
         method: 'get',
@@ -127,16 +129,6 @@ angular.module('starter', ['ionic','ngCordova','player'])
 
 .controller('audioController', [ '$scope', function($scope){
   $scope.audios = [];
-
-  $scope.stopOldAudios = function(){
-
-    $scope.audios.forEach(function(audio, index, array){
-      audio.pause();
-    })
-
-    $scope.audios = []
-  }
-
 }])
 
 
