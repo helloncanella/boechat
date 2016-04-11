@@ -1,6 +1,10 @@
-.range
-	audio(ng-src="{{ctrl.src}}" autoplay)
-	input(type="range" name="track" min="0" max="100" ng-model="rangeValue" on-touch="ctrl.pauseAudio()" on-release="ctrl.updateTime(rangeValue)")
-.row
-	button.range-positive.col.col-50.col-offset-25.col-center
-		i.fa(ng-class="ctrl.paused ?  'fa-play' : 'fa-pause'")
+.content(ng-show="ctrl.show")
+	.range
+		audio(ng-src="{{ctrl.src}}" autoplay)
+		input(type="range" name="track" min="0" max="100" ng-model="rangeValue" on-touch="ctrl.pauseAudio()" on-release="ctrl.updateTime(rangeValue)")
+	
+	.row.time(on-touch="ctrl.updateTouchCount()")
+		p.col.col-center {{ctrl.time}} #[span(ng-show ="(ctrl.count == 0) ? true : false") | {{ctrl.duration}}]
+	.row
+		button.range-positive.col.col-50.col-offset-25.col-center
+			i.fa(ng-class="ctrl.paused ?  'fa-play' : 'fa-pause'")

@@ -2,7 +2,14 @@
 	#player{
 		player{
 			.row{
-				height:65vh;
+				height:30vh;
+
+				&.time{
+					height: 20vh;
+					text-align: center;
+					font-size: 1.5rem;
+				}
+
 				button{
 					padding: 0;
 			    	border: none;

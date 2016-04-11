@@ -9732,7 +9732,11 @@ a.button {
   transition-duration: 0s; }
 
 .scroll #player player .row {
-  height: 65vh; }
+  height: 30vh; }
+  .scroll #player player .row.time {
+    height: 20vh;
+    text-align: center;
+    font-size: 1.5rem; }
   .scroll #player player .row button {
     padding: 0;
     border: none;
